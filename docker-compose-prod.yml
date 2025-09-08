@@ -5,6 +5,8 @@ services:
     container_name: mailer
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     networks:
       - backend
 
