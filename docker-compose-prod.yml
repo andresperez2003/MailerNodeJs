@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - app_network
+      - backend
 
 networks:
   backend:
