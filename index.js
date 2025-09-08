@@ -22,14 +22,7 @@ app.use(express.json({
 
 
 
-function generateSignature(req, res, next) {
-    const signature = crypto
-      .createHmac("sha256", process.env.SECRET_KEY)
-      .update(JSON.stringify(req.body))
-      .digest("hex");
-    req.signature = signature;
-    next();
-}
+
 
 
 function verifySignature(req, res, next) {
@@ -47,8 +40,7 @@ function verifySignature(req, res, next) {
       .update(timestamp + req.rawBody)
       .digest("hex");
   
-    console.log("Signature received:", signature);
-    console.log("Signature expected:", expectedSignature);
+
   
     if (signature !== expectedSignature) {
       return res.status(401).json({ error: "Unauthorized: invalid signature" });
@@ -57,10 +49,6 @@ function verifySignature(req, res, next) {
     next();
   }
 
-app.post('/generate-signature', generateSignature, (req, res, next) => {
-    res.json({signature: req.signature});
-    next();
-});
 
 // Route to send emails using SendGrid
 app.post('/send-email', verifySignature, async (req, res) => {
