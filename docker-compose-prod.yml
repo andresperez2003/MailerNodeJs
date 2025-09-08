@@ -9,6 +9,9 @@ services:
       - "3000:3000"
     env_file:
       - .env
+    environment:
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - SENDGRID_FROM=${SENDGRID_FROM}
     networks:
       - backend
 
