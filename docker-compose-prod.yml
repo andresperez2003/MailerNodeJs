@@ -1,8 +1,9 @@
 version: "3.9"
 services:
   mailer:
-    build: .
-    dockerfile: Dockerfile.mailer
+    build:
+      context: .
+      dockerfile: Dockerfile.mailer
     container_name: mailer
     ports:
       - "3000:3000"
